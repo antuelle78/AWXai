@@ -149,7 +149,7 @@ use_dev_supervisor.txt
 /Dockerfile.dev
 /Dockerfile.kube-dev
 
-awx/ui/src
+# awx/ui/src
 awx/ui/build
 awx/ui/.ui-built
 awx/ui_next

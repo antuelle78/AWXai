@@ -567,3 +567,4 @@ setuptools==80.9.0
     #   pbr
     #   setuptools-rust
     #   setuptools-scm
+django-auth-ldap

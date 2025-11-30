@@ -18,28 +18,28 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # FIXME: it would be nice to cycle back around and allow this to be
 # BigAutoField going forward, but we'd have to be explicit about our
 # existing models.
-DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'awx.sqlite3'),
-        'ATOMIC_REQUESTS': True,
-        'TEST': {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "awx.sqlite3"),
+        "ATOMIC_REQUESTS": True,
+        "TEST": {
             # Test database cannot be :memory: for inventory tests.
-            'NAME': os.path.join(BASE_DIR, 'awx_test.sqlite3')
+            "NAME": os.path.join(BASE_DIR, "awx_test.sqlite3")
         },
     }
 }
 
 # Special database overrides for dispatcher connections listening to pg_notify
 LISTENER_DATABASES = {
-    'default': {
-        'OPTIONS': {
-            'keepalives': 1,
-            'keepalives_idle': 5,
-            'keepalives_interval': 5,
-            'keepalives_count': 5,
+    "default": {
+        "OPTIONS": {
+            "keepalives": 1,
+            "keepalives_idle": 5,
+            "keepalives_interval": 5,
+            "keepalives_count": 5,
         },
     }
 }
@@ -52,8 +52,10 @@ LISTENER_DATABASES = {
 IS_K8S = False
 
 AWX_CONTAINER_GROUP_K8S_API_TIMEOUT = 10
-AWX_CONTAINER_GROUP_DEFAULT_NAMESPACE = os.getenv('MY_POD_NAMESPACE', 'default')
-AWX_CONTAINER_GROUP_DEFAULT_JOB_LABEL = os.getenv('AWX_CONTAINER_GROUP_DEFAULT_JOB_LABEL', 'ansible_job')
+AWX_CONTAINER_GROUP_DEFAULT_NAMESPACE = os.getenv("MY_POD_NAMESPACE", "default")
+AWX_CONTAINER_GROUP_DEFAULT_JOB_LABEL = os.getenv(
+    "AWX_CONTAINER_GROUP_DEFAULT_JOB_LABEL", "ansible_job"
+)
 # Timeout when waiting for pod to enter running state. If the pod is still in pending state , it will be terminated. Valid time units are "s", "m", "h". Example : "5m" , "10s".
 AWX_CONTAINER_GROUP_POD_PENDING_TIMEOUT = "2h"
 
@@ -70,11 +72,11 @@ AWX_CONTROL_NODE_TASK_IMPACT = 1
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'UTC'
+TIME_ZONE = "UTC"
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "en-us"
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -83,44 +85,44 @@ USE_I18N = True
 USE_TZ = True
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'ui', 'build'),
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, "ui", "build"),
+    os.path.join(BASE_DIR, "static"),
 ]
 
 # Absolute filesystem path to the directory where static file are collected via
 # the collectstatic command.
-STATIC_ROOT = '/var/lib/awx/public/static'
+STATIC_ROOT = "/var/lib/awx/public/static"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
-STATIC_URL = '/static/'
+STATIC_URL = "/static/"
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = os.path.join(BASE_DIR, 'public', 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, "public", "media")
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = '/media/'
+MEDIA_URL = "/media/"
 
-LOGIN_URL = '/api/login/'
+LOGIN_URL = "/api/login/"
 LOGOUT_ALLOWED_HOSTS = None
 
 # Absolute filesystem path to the directory to host projects (with playbooks).
 # This directory should not be web-accessible.
-PROJECTS_ROOT = '/var/lib/awx/projects/'
+PROJECTS_ROOT = "/var/lib/awx/projects/"
 
 # Absolute filesystem path to the directory for job status stdout (default for
 # development and tests, default for production defined in production.py). This
 # directory should not be web-accessible
-JOBOUTPUT_ROOT = '/var/lib/awx/job_status/'
+JOBOUTPUT_ROOT = "/var/lib/awx/job_status/"
 
 # Absolute filesystem path to the directory to store logs
-LOG_ROOT = '/var/log/tower/'
+LOG_ROOT = "/var/log/tower/"
 
 # Django gettext files path: locale/<lang-code>/LC_MESSAGES/django.po, django.mo
-LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
+LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
 
 # Graph of resources that can have named-url
 NAMED_URL_GRAPH = {}
@@ -142,8 +144,8 @@ BULK_HOST_MAX_DELETE = 250
 SITE_ID = 1
 
 # Make this unique, and don't share it with anybody.
-if os.path.exists('/etc/tower/SECRET_KEY'):
-    with open('/etc/tower/SECRET_KEY', 'rb') as f:
+if os.path.exists("/etc/tower/SECRET_KEY"):
+    with open("/etc/tower/SECRET_KEY", "rb") as f:
         SECRET_KEY = f.read().strip()
 else:
     SECRET_KEY = base64.encodebytes(os.urandom(32)).decode().rstrip()
@@ -155,7 +157,7 @@ ALLOWED_HOSTS = []
 # HTTP headers and meta keys to search to determine remote host name or IP. Add
 # additional items to this list, such as "HTTP_X_FORWARDED_FOR", if behind a
 # reverse proxy.
-REMOTE_HOST_HEADERS = ['REMOTE_ADDR', 'REMOTE_HOST']
+REMOTE_HOST_HEADERS = ["REMOTE_ADDR", "REMOTE_HOST"]
 
 # If we are behind a reverse proxy/load balancer, use this setting to
 # allow the proxy IP addresses from which Tower should trust custom
@@ -181,13 +183,15 @@ DEFAULT_EXECUTION_ENVIRONMENT = None
 # Should be ordered from highest to lowest precedence.
 # The awx-manage register_default_execution_environments command reads this setting and registers the EE(s)
 # If a registry credential is needed to pull the image, that can be provided to the awx-manage command
-GLOBAL_JOB_EXECUTION_ENVIRONMENTS = [{'name': 'AWX EE (latest)', 'image': 'quay.io/ansible/awx-ee:latest'}]
+GLOBAL_JOB_EXECUTION_ENVIRONMENTS = [
+    {"name": "AWX EE (latest)", "image": "ghcr.io/antuelle78/awx-ee:latest"}
+]
 # This setting controls which EE will be used for project updates.
 # The awx-manage register_default_execution_environments command reads this setting and registers the EE
 # This image is distinguished from others by having "managed" set to True and users have limited
 # ability to modify it through the API.
 # If a registry credential is needed to pull the image, that can be provided to the awx-manage command
-CONTROL_PLANE_EXECUTION_ENVIRONMENT = 'quay.io/ansible/awx-ee:latest'
+CONTROL_PLANE_EXECUTION_ENVIRONMENT = "ghcr.io/antuelle78/awx-ee:latest"
 
 # Note: This setting may be overridden by database settings.
 STDOUT_MAX_BYTES_DISPLAY = 1048576
@@ -271,11 +275,11 @@ SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_AGE = 1800
 
 # Option to change userLoggedIn cookie SameSite policy.
-USER_COOKIE_SAMESITE = 'Lax'
+USER_COOKIE_SAMESITE = "Lax"
 
 # Name of the cookie that contains the session information.
 # Note: Changing this value may require changes to any clients.
-SESSION_COOKIE_NAME = 'awx_sessionid'
+SESSION_COOKIE_NAME = "awx_sessionid"
 
 # Maximum number of per-user valid, concurrent sessions.
 # -1 is unlimited
@@ -292,98 +296,105 @@ CSRF_COOKIE_AGE = None
 
 TEMPLATES = [
     {
-        'NAME': 'default',
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [  # NOQA
-                'django.contrib.auth.context_processors.auth',
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.template.context_processors.i18n',
-                'django.template.context_processors.media',
-                'django.template.context_processors.static',
-                'django.template.context_processors.tz',
-                'django.contrib.messages.context_processors.messages',
-                'django.template.context_processors.request',
-                'awx.ui.context_processors.csp',
-                'awx.ui.context_processors.version',
+        "NAME": "default",
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [  # NOQA
+                "django.contrib.auth.context_processors.auth",
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.template.context_processors.i18n",
+                "django.template.context_processors.media",
+                "django.template.context_processors.static",
+                "django.template.context_processors.tz",
+                "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.request",
+                "awx.ui.context_processors.csp",
+                "awx.ui.context_processors.version",
             ],
-            'builtins': ['awx.main.templatetags.swagger'],
-            'libraries': {
+            "builtins": ["awx.main.templatetags.swagger"],
+            "libraries": {
                 "ansible_base.lib.templatetags.requests": "ansible_base.lib.templatetags.requests",
                 "ansible_base.lib.templatetags.util": "ansible_base.lib.templatetags.util",
             },
         },
-        'DIRS': [
-            os.path.join(BASE_DIR, 'templates'),
-            os.path.join(BASE_DIR, 'ui', 'public'),
-            os.path.join(BASE_DIR, 'ui', 'build', 'awx'),
+        "DIRS": [
+            os.path.join(BASE_DIR, "templates"),
+            os.path.join(BASE_DIR, "ui", "public"),
+            os.path.join(BASE_DIR, "ui", "build", "awx"),
         ],
     },
 ]
 
-ROOT_URLCONF = 'awx.urls'
+ROOT_URLCONF = "awx.urls"
 
-WSGI_APPLICATION = 'awx.wsgi.application'
+WSGI_APPLICATION = "awx.wsgi.application"
 
 INSTALLED_APPS = [
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.messages',
-    'django.contrib.sessions',
-    'django.contrib.sites',
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.messages",
+    "django.contrib.sessions",
+    "django.contrib.sites",
     # daphne has to be installed before django.contrib.staticfiles for the app to startup
     # According to channels 4.0 docs you install daphne instead of channels now
-    'daphne',
-    'django.contrib.staticfiles',
-    'rest_framework',
-    'django_extensions',
-    'polymorphic',
-    'django_guid',
-    'corsheaders',
-    'awx.conf',
-    'awx.main',
-    'awx.api',
-    'awx.ui',
-    'solo',
-    'ansible_base.rest_filters',
-    'ansible_base.jwt_consumer',
-    'ansible_base.resource_registry',
-    'ansible_base.rbac',
-    'ansible_base.feature_flags',
-    'flags',
+    "daphne",
+    "django.contrib.staticfiles",
+    "rest_framework",
+    "django_extensions",
+    "polymorphic",
+    "django_guid",
+    "corsheaders",
+    "awx.conf",
+    "awx.main",
+    "awx.api",
+    "awx.ui",
+    "solo",
+    "ansible_base.rest_filters",
+    "ansible_base.jwt_consumer",
+    "ansible_base.resource_registry",
+    "ansible_base.rbac",
+    "ansible_base.feature_flags",
+    "ansible_base.authentication",
+    "flags",
 ]
 
 
-INTERNAL_IPS = ('127.0.0.1',)
+INTERNAL_IPS = ("127.0.0.1",)
 
 MAX_PAGE_SIZE = 200
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'awx.api.pagination.Pagination',
-    'PAGE_SIZE': 25,
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'ansible_base.jwt_consumer.awx.auth.AwxJWTAuthentication',
-        'awx.api.authentication.SessionAuthentication',
-        'awx.api.authentication.LoggedBasicAuthentication',
+    "DEFAULT_PAGINATION_CLASS": "awx.api.pagination.Pagination",
+    "PAGE_SIZE": 25,
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "ansible_base.jwt_consumer.awx.auth.AwxJWTAuthentication",
+        "awx.api.authentication.SessionAuthentication",
+        "awx.api.authentication.LoggedBasicAuthentication",
     ),
-    'DEFAULT_PERMISSION_CLASSES': ('awx.api.permissions.ModelAccessPermission',),
-    'DEFAULT_PARSER_CLASSES': ('awx.api.parsers.JSONParser',),
-    'DEFAULT_RENDERER_CLASSES': ('awx.api.renderers.DefaultJSONRenderer', 'awx.api.renderers.BrowsableAPIRenderer'),
-    'DEFAULT_METADATA_CLASS': 'awx.api.metadata.Metadata',
-    'EXCEPTION_HANDLER': 'awx.api.views.api_exception_handler',
-    'VIEW_DESCRIPTION_FUNCTION': 'awx.api.generics.get_view_description',
-    'NON_FIELD_ERRORS_KEY': '__all__',
-    'DEFAULT_VERSION': 'v2',
+    "DEFAULT_PERMISSION_CLASSES": ("awx.api.permissions.ModelAccessPermission",),
+    "DEFAULT_PARSER_CLASSES": ("awx.api.parsers.JSONParser",),
+    "DEFAULT_RENDERER_CLASSES": (
+        "awx.api.renderers.DefaultJSONRenderer",
+        "awx.api.renderers.BrowsableAPIRenderer",
+    ),
+    "DEFAULT_METADATA_CLASS": "awx.api.metadata.Metadata",
+    "EXCEPTION_HANDLER": "awx.api.views.api_exception_handler",
+    "VIEW_DESCRIPTION_FUNCTION": "awx.api.generics.get_view_description",
+    "NON_FIELD_ERRORS_KEY": "__all__",
+    "DEFAULT_VERSION": "v2",
     # For OpenAPI schema generation with drf-spectacular
     # see https://github.com/encode/django-rest-framework/pull/6532
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     # 'URL_FORMAT_OVERRIDE': None,
 }
 
 # SWAGGER_SETTINGS removed - migrated to drf-spectacular (see SPECTACULAR_SETTINGS below)
 
-AUTHENTICATION_BACKENDS = ('awx.main.backends.AWXModelBackend',)
+AUTHENTICATION_BACKENDS = (
+    "ansible_base.authentication.backend.AnsibleBaseAuth",
+    "awx.main.backends.AWXModelBackend",
+)
 
 # Enable / Disable HTTP Basic Authentication used in the API browser
 # Note: Session limits are not enforced when using HTTP Basic Authentication.
@@ -392,16 +403,16 @@ AUTH_BASIC_ENABLED = True
 
 # If set, specifies a URL that unauthenticated users will be redirected to
 # when trying to access a UI page that requries authentication.
-LOGIN_REDIRECT_OVERRIDE = ''
+LOGIN_REDIRECT_OVERRIDE = ""
 
 # Note: This setting may be overridden by database settings.
 ALLOW_METRICS_FOR_ANONYMOUS_USERS = False
 
-DEVSERVER_DEFAULT_ADDR = '0.0.0.0'
-DEVSERVER_DEFAULT_PORT = '8013'
+DEVSERVER_DEFAULT_ADDR = "0.0.0.0"
+DEVSERVER_DEFAULT_PORT = "8013"
 
 # Set default ports for live server tests.
-os.environ.setdefault('DJANGO_LIVE_TEST_SERVER_ADDRESS', 'localhost:9013-9199')
+os.environ.setdefault("DJANGO_LIVE_TEST_SERVER_ADDRESS", "localhost:9013-9199")
 
 # heartbeat period can factor into some forms of logic, so it is maintained as a setting here
 CLUSTER_NODE_HEARTBEAT_PERIOD = 60
@@ -410,7 +421,9 @@ CLUSTER_NODE_HEARTBEAT_PERIOD = 60
 CLUSTER_NODE_MISSED_HEARTBEAT_TOLERANCE = 2
 
 RECEPTOR_SERVICE_ADVERTISEMENT_PERIOD = 60  # https://github.com/ansible/receptor/blob/aa1d589e154d8a0cb99a220aff8f98faf2273be6/pkg/netceptor/netceptor.go#L34
-EXECUTION_NODE_REMEDIATION_CHECKS = 60 * 30  # once every 30 minutes check if an execution node errors have been resolved
+EXECUTION_NODE_REMEDIATION_CHECKS = (
+    60 * 30
+)  # once every 30 minutes check if an execution node errors have been resolved
 
 # Amount of time dispatcher will try to reconnect to database for jobs and consuming new work
 DISPATCHER_DB_DOWNTIME_TOLERANCE = 40
@@ -421,53 +434,95 @@ DISPATCHER_DB_DOWNTIME_TOLERANCE = 40
 DISPATCHER_MOCK_PUBLISH = False
 
 # Debugging sockfile for the --status command
-DISPATCHERD_DEBUGGING_SOCKFILE = os.path.join(BASE_DIR, 'dispatcherd.sock')
+DISPATCHERD_DEBUGGING_SOCKFILE = os.path.join(BASE_DIR, "dispatcherd.sock")
 
-BROKER_URL = 'unix:///var/run/redis/redis.sock'
+BROKER_URL = "unix:///var/run/redis/redis.sock"
 CELERYBEAT_SCHEDULE = {
-    'tower_scheduler': {'task': 'awx.main.tasks.system.awx_periodic_scheduler', 'schedule': timedelta(seconds=30), 'options': {'expires': 20}},
-    'cluster_heartbeat': {
-        'task': 'awx.main.tasks.system.cluster_node_heartbeat',
-        'schedule': timedelta(seconds=CLUSTER_NODE_HEARTBEAT_PERIOD),
-        'options': {'expires': 50},
+    "tower_scheduler": {
+        "task": "awx.main.tasks.system.awx_periodic_scheduler",
+        "schedule": timedelta(seconds=30),
+        "options": {"expires": 20},
     },
-    'gather_analytics': {'task': 'awx.main.tasks.system.gather_analytics', 'schedule': timedelta(minutes=5)},
-    'task_manager': {'task': 'awx.main.scheduler.tasks.task_manager', 'schedule': timedelta(seconds=20), 'options': {'expires': 20}},
-    'dependency_manager': {'task': 'awx.main.scheduler.tasks.dependency_manager', 'schedule': timedelta(seconds=20), 'options': {'expires': 20}},
-    'k8s_reaper': {'task': 'awx.main.tasks.system.awx_k8s_reaper', 'schedule': timedelta(seconds=60), 'options': {'expires': 50}},
-    'receptor_reaper': {'task': 'awx.main.tasks.system.awx_receptor_workunit_reaper', 'schedule': timedelta(seconds=60)},
-    'send_subsystem_metrics': {'task': 'awx.main.analytics.analytics_tasks.send_subsystem_metrics', 'schedule': timedelta(seconds=20)},
-    'cleanup_images': {'task': 'awx.main.tasks.system.cleanup_images_and_files', 'schedule': timedelta(hours=3)},
-    'cleanup_host_metrics': {'task': 'awx.main.tasks.host_metrics.cleanup_host_metrics', 'schedule': timedelta(hours=3, minutes=30)},
-    'host_metric_summary_monthly': {'task': 'awx.main.tasks.host_metrics.host_metric_summary_monthly', 'schedule': timedelta(hours=4)},
-    'periodic_resource_sync': {'task': 'awx.main.tasks.system.periodic_resource_sync', 'schedule': timedelta(minutes=15)},
-    'cleanup_and_save_indirect_host_entries_fallback': {
-        'task': 'awx.main.tasks.host_indirect.cleanup_and_save_indirect_host_entries_fallback',
-        'schedule': timedelta(minutes=60),
+    "cluster_heartbeat": {
+        "task": "awx.main.tasks.system.cluster_node_heartbeat",
+        "schedule": timedelta(seconds=CLUSTER_NODE_HEARTBEAT_PERIOD),
+        "options": {"expires": 50},
+    },
+    "gather_analytics": {
+        "task": "awx.main.tasks.system.gather_analytics",
+        "schedule": timedelta(minutes=5),
+    },
+    "task_manager": {
+        "task": "awx.main.scheduler.tasks.task_manager",
+        "schedule": timedelta(seconds=20),
+        "options": {"expires": 20},
+    },
+    "dependency_manager": {
+        "task": "awx.main.scheduler.tasks.dependency_manager",
+        "schedule": timedelta(seconds=20),
+        "options": {"expires": 20},
+    },
+    "k8s_reaper": {
+        "task": "awx.main.tasks.system.awx_k8s_reaper",
+        "schedule": timedelta(seconds=60),
+        "options": {"expires": 50},
+    },
+    "receptor_reaper": {
+        "task": "awx.main.tasks.system.awx_receptor_workunit_reaper",
+        "schedule": timedelta(seconds=60),
+    },
+    "send_subsystem_metrics": {
+        "task": "awx.main.analytics.analytics_tasks.send_subsystem_metrics",
+        "schedule": timedelta(seconds=20),
+    },
+    "cleanup_images": {
+        "task": "awx.main.tasks.system.cleanup_images_and_files",
+        "schedule": timedelta(hours=3),
+    },
+    "cleanup_host_metrics": {
+        "task": "awx.main.tasks.host_metrics.cleanup_host_metrics",
+        "schedule": timedelta(hours=3, minutes=30),
+    },
+    "host_metric_summary_monthly": {
+        "task": "awx.main.tasks.host_metrics.host_metric_summary_monthly",
+        "schedule": timedelta(hours=4),
+    },
+    "periodic_resource_sync": {
+        "task": "awx.main.tasks.system.periodic_resource_sync",
+        "schedule": timedelta(minutes=15),
+    },
+    "cleanup_and_save_indirect_host_entries_fallback": {
+        "task": "awx.main.tasks.host_indirect.cleanup_and_save_indirect_host_entries_fallback",
+        "schedule": timedelta(minutes=60),
     },
 }
 
 DISPATCHER_SCHEDULE = {}
 for options in CELERYBEAT_SCHEDULE.values():
     new_options = options.copy()
-    task_name = options['task']
+    task_name = options["task"]
     # Handle the only one exception case of the heartbeat which has a new implementation
-    if task_name == 'awx.main.tasks.system.cluster_node_heartbeat':
-        task_name = 'awx.main.tasks.system.adispatch_cluster_node_heartbeat'
-        new_options['task'] = task_name
-    new_options['schedule'] = options['schedule'].total_seconds()
+    if task_name == "awx.main.tasks.system.cluster_node_heartbeat":
+        task_name = "awx.main.tasks.system.adispatch_cluster_node_heartbeat"
+        new_options["task"] = task_name
+    new_options["schedule"] = options["schedule"].total_seconds()
     DISPATCHER_SCHEDULE[task_name] = new_options
 
 # Django Caching Configuration
 DJANGO_REDIS_IGNORE_EXCEPTIONS = True
-CACHES = {'default': {'BACKEND': 'awx.main.cache.AWXRedisCache', 'LOCATION': 'unix:///var/run/redis/redis.sock?db=1'}}
+CACHES = {
+    "default": {
+        "BACKEND": "awx.main.cache.AWXRedisCache",
+        "LOCATION": "unix:///var/run/redis/redis.sock?db=1",
+    }
+}
 
-ROLE_SINGLETON_USER_RELATIONSHIP = ''
-ROLE_SINGLETON_TEAM_RELATIONSHIP = ''
+ROLE_SINGLETON_USER_RELATIONSHIP = ""
+ROLE_SINGLETON_TEAM_RELATIONSHIP = ""
 
 # We want to short-circuit RBAC methods to get permission to system admins and auditors
-ROLE_BYPASS_SUPERUSER_FLAGS = ['is_superuser']
-ROLE_BYPASS_ACTION_FLAGS = {'view': 'is_system_auditor'}
+ROLE_BYPASS_SUPERUSER_FLAGS = ["is_superuser"]
+ROLE_BYPASS_ACTION_FLAGS = {"view": "is_system_auditor"}
 
 # Any ANSIBLE_* settings will be passed to the task runner subprocess
 # environment
@@ -492,13 +547,16 @@ AWX_TASK_ENV = {}
 
 # Additional environment variables to apply when running ansible-galaxy commands
 # to fetch Ansible content - roles and collections
-GALAXY_TASK_ENV = {'ANSIBLE_FORCE_COLOR': 'false', 'GIT_SSH_COMMAND': "ssh -o StrictHostKeyChecking=no"}
+GALAXY_TASK_ENV = {
+    "ANSIBLE_FORCE_COLOR": "false",
+    "GIT_SSH_COMMAND": "ssh -o StrictHostKeyChecking=no",
+}
 
 # Rebuild Host Smart Inventory memberships.
 AWX_REBUILD_SMART_MEMBERSHIP = False
 
 # By default, allow arbitrary Jinja templating in extra_vars defined on a Job Template
-ALLOW_JINJA_IN_EXTRA_VARS = 'template'
+ALLOW_JINJA_IN_EXTRA_VARS = "template"
 
 # Run project updates with extra verbosity
 PROJECT_UPDATE_VVV = False
@@ -551,30 +609,30 @@ INSIGHTS_TRACKING_STATE = False
 # Last gather date for Analytics
 AUTOMATION_ANALYTICS_LAST_GATHER = None
 # Last gathered entries for expensive Analytics
-AUTOMATION_ANALYTICS_LAST_ENTRIES = ''
+AUTOMATION_ANALYTICS_LAST_ENTRIES = ""
 
 # Default list of modules allowed for ad hoc commands.
 # Note: This setting may be overridden by database settings.
 AD_HOC_COMMANDS = [
-    'command',
-    'shell',
-    'yum',
-    'apt',
-    'apt_key',
-    'apt_repository',
-    'apt_rpm',
-    'service',
-    'group',
-    'user',
-    'mount',
-    'ping',
-    'selinux',
-    'setup',
-    'win_ping',
-    'win_service',
-    'win_updates',
-    'win_group',
-    'win_user',
+    "command",
+    "shell",
+    "yum",
+    "apt",
+    "apt_key",
+    "apt_repository",
+    "apt_rpm",
+    "service",
+    "group",
+    "user",
+    "mount",
+    "ping",
+    "selinux",
+    "setup",
+    "win_ping",
+    "win_service",
+    "win_updates",
+    "win_group",
+    "win_user",
 ]
 
 INV_ENV_VARIABLE_BLOCKED = ("HOME", "USER", "_", "TERM", "PATH")
@@ -582,17 +640,17 @@ INV_ENV_VARIABLE_BLOCKED = ("HOME", "USER", "_", "TERM", "PATH")
 # ----------------
 # -- Amazon EC2 --
 # ----------------
-EC2_ENABLED_VAR = 'ec2_state'
-EC2_ENABLED_VALUE = 'running'
-EC2_INSTANCE_ID_VAR = 'instance_id'
+EC2_ENABLED_VAR = "ec2_state"
+EC2_ENABLED_VALUE = "running"
+EC2_INSTANCE_ID_VAR = "instance_id"
 EC2_EXCLUDE_EMPTY_GROUPS = True
 
 # ------------
 # -- VMware --
 # ------------
-VMWARE_ENABLED_VAR = 'guest.gueststate'
-VMWARE_ENABLED_VALUE = 'running'
-VMWARE_INSTANCE_ID_VAR = 'config.instanceUuid, config.instanceuuid'
+VMWARE_ENABLED_VAR = "guest.gueststate"
+VMWARE_ENABLED_VALUE = "running"
+VMWARE_INSTANCE_ID_VAR = "config.instanceUuid, config.instanceuuid"
 VMWARE_EXCLUDE_EMPTY_GROUPS = True
 
 VMWARE_VALIDATE_CERTS = False
@@ -606,50 +664,50 @@ VMWARE_ESXI_EXCLUDE_EMPTY_GROUPS = True
 # ---------------------------
 # -- Google Compute Engine --
 # ---------------------------
-GCE_ENABLED_VAR = 'status'
-GCE_ENABLED_VALUE = 'running'
+GCE_ENABLED_VAR = "status"
+GCE_ENABLED_VALUE = "running"
 GCE_EXCLUDE_EMPTY_GROUPS = True
-GCE_INSTANCE_ID_VAR = 'gce_id'
+GCE_INSTANCE_ID_VAR = "gce_id"
 
 # --------------------------------------
 # -- Microsoft Azure Resource Manager --
 # --------------------------------------
-AZURE_RM_ENABLED_VAR = 'powerstate'
-AZURE_RM_ENABLED_VALUE = 'running'
-AZURE_RM_INSTANCE_ID_VAR = 'id'
+AZURE_RM_ENABLED_VAR = "powerstate"
+AZURE_RM_ENABLED_VALUE = "running"
+AZURE_RM_INSTANCE_ID_VAR = "id"
 AZURE_RM_EXCLUDE_EMPTY_GROUPS = True
 
 # ---------------------
 # ----- OpenStack -----
 # ---------------------
-OPENSTACK_ENABLED_VAR = 'status'
-OPENSTACK_ENABLED_VALUE = 'ACTIVE'
+OPENSTACK_ENABLED_VAR = "status"
+OPENSTACK_ENABLED_VALUE = "ACTIVE"
 OPENSTACK_EXCLUDE_EMPTY_GROUPS = True
-OPENSTACK_INSTANCE_ID_VAR = 'openstack.id'
+OPENSTACK_INSTANCE_ID_VAR = "openstack.id"
 
 # ---------------------
 # ----- oVirt4 -----
 # ---------------------
-RHV_ENABLED_VAR = 'status'
-RHV_ENABLED_VALUE = 'up'
+RHV_ENABLED_VAR = "status"
+RHV_ENABLED_VALUE = "up"
 RHV_EXCLUDE_EMPTY_GROUPS = True
-RHV_INSTANCE_ID_VAR = 'id'
+RHV_INSTANCE_ID_VAR = "id"
 
 # ---------------------
 # ----- Controller     -----
 # ---------------------
-CONTROLLER_ENABLED_VAR = 'remote_tower_enabled'
-CONTROLLER_ENABLED_VALUE = 'true'
+CONTROLLER_ENABLED_VAR = "remote_tower_enabled"
+CONTROLLER_ENABLED_VALUE = "true"
 CONTROLLER_EXCLUDE_EMPTY_GROUPS = True
-CONTROLLER_INSTANCE_ID_VAR = 'remote_tower_id'
+CONTROLLER_INSTANCE_ID_VAR = "remote_tower_id"
 
 # ---------------------
 # ----- Foreman -----
 # ---------------------
-SATELLITE6_ENABLED_VAR = 'foreman_enabled,foreman.enabled'
-SATELLITE6_ENABLED_VALUE = 'True'
+SATELLITE6_ENABLED_VAR = "foreman_enabled,foreman.enabled"
+SATELLITE6_ENABLED_VALUE = "True"
 SATELLITE6_EXCLUDE_EMPTY_GROUPS = True
-SATELLITE6_INSTANCE_ID_VAR = 'foreman_id,foreman.id'
+SATELLITE6_INSTANCE_ID_VAR = "foreman_id,foreman.id"
 # SATELLITE6_GROUP_PREFIX and SATELLITE6_GROUP_PATTERNS defined in source vars
 
 # ----------------
@@ -657,7 +715,7 @@ SATELLITE6_INSTANCE_ID_VAR = 'foreman_id,foreman.id'
 # ----------------
 # INSIGHTS_ENABLED_VAR =
 # INSIGHTS_ENABLED_VALUE =
-INSIGHTS_INSTANCE_ID_VAR = 'insights_id'
+INSIGHTS_INSTANCE_ID_VAR = "insights_id"
 INSIGHTS_EXCLUDE_EMPTY_GROUPS = False
 
 # ----------------
@@ -665,7 +723,7 @@ INSIGHTS_EXCLUDE_EMPTY_GROUPS = False
 # ----------------
 # TERRAFORM_ENABLED_VAR =
 # TERRAFORM_ENABLED_VALUE =
-TERRAFORM_INSTANCE_ID_VAR = 'id'
+TERRAFORM_INSTANCE_ID_VAR = "id"
 TERRAFORM_EXCLUDE_EMPTY_GROUPS = True
 
 # ------------------------
@@ -692,7 +750,7 @@ SCM_EXCLUDE_EMPTY_GROUPS = False
 # ----------------
 # -- Constructed --
 # ----------------
-CONSTRUCTED_INSTANCE_ID_VAR = 'remote_tower_id'
+CONSTRUCTED_INSTANCE_ID_VAR = "remote_tower_id"
 
 CONSTRUCTED_EXCLUDE_EMPTY_GROUPS = False
 
@@ -716,101 +774,171 @@ TOWER_URL_BASE = "https://platformhost"
 
 INSIGHTS_URL_BASE = "https://example.org"
 INSIGHTS_OIDC_ENDPOINT = "https://sso.example.org/"
-INSIGHTS_AGENT_MIME = 'application/example'
+INSIGHTS_AGENT_MIME = "application/example"
 # See https://github.com/ansible/awx-facts-playbooks
-INSIGHTS_SYSTEM_ID_FILE = '/etc/redhat-access-insights/machine-id'
+INSIGHTS_SYSTEM_ID_FILE = "/etc/redhat-access-insights/machine-id"
 INSIGHTS_CERT_PATH = "/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem"
 
 # Settings related to external logger configuration
 LOG_AGGREGATOR_ENABLED = False
 LOG_AGGREGATOR_TCP_TIMEOUT = 5
 LOG_AGGREGATOR_VERIFY_CERT = True
-LOG_AGGREGATOR_LEVEL = 'INFO'
+LOG_AGGREGATOR_LEVEL = "INFO"
 LOG_AGGREGATOR_ACTION_QUEUE_SIZE = 131072
 LOG_AGGREGATOR_ACTION_MAX_DISK_USAGE_GB = 1  # Action queue
-LOG_AGGREGATOR_MAX_DISK_USAGE_PATH = '/var/lib/awx'
+LOG_AGGREGATOR_MAX_DISK_USAGE_PATH = "/var/lib/awx"
 LOG_AGGREGATOR_RSYSLOGD_DEBUG = False
-LOG_AGGREGATOR_RSYSLOGD_ERROR_LOG_FILE = '/var/log/tower/rsyslog.err'
-API_400_ERROR_LOG_FORMAT = 'status {status_code} received by user {user_name} attempting to access {url_path} from {remote_addr}'
+LOG_AGGREGATOR_RSYSLOGD_ERROR_LOG_FILE = "/var/log/tower/rsyslog.err"
+API_400_ERROR_LOG_FORMAT = "status {status_code} received by user {user_name} attempting to access {url_path} from {remote_addr}"
 
 ASGI_APPLICATION = "awx.main.routing.application"
 
 CHANNEL_LAYERS = {
-    "default": {"BACKEND": "channels_redis.core.RedisChannelLayer", "CONFIG": {"hosts": [BROKER_URL], "capacity": 10000, "group_expiry": 157784760}}  # 5 years
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {"hosts": [BROKER_URL], "capacity": 10000, "group_expiry": 157784760},
+    }  # 5 years
 }
 
 # Logging configuration.
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {'()': 'django.utils.log.RequireDebugFalse'},
-        'require_debug_true': {'()': 'django.utils.log.RequireDebugTrue'},
-        'require_debug_true_or_test': {'()': 'awx.main.utils.RequireDebugTrueOrTest'},
-        'external_log_enabled': {'()': 'awx.main.utils.filters.ExternalLoggerEnabled'},
-        'dynamic_level_filter': {'()': 'awx.main.utils.filters.DynamicLevelFilter'},
-        'guid': {'()': 'awx.main.utils.filters.DefaultCorrelationId'},
+    "version": 1,
+    "disable_existing_loggers": False,
+    "filters": {
+        "require_debug_false": {"()": "django.utils.log.RequireDebugFalse"},
+        "require_debug_true": {"()": "django.utils.log.RequireDebugTrue"},
+        "require_debug_true_or_test": {"()": "awx.main.utils.RequireDebugTrueOrTest"},
+        "external_log_enabled": {"()": "awx.main.utils.filters.ExternalLoggerEnabled"},
+        "dynamic_level_filter": {"()": "awx.main.utils.filters.DynamicLevelFilter"},
+        "guid": {"()": "awx.main.utils.filters.DefaultCorrelationId"},
     },
-    'formatters': {
-        'simple': {'format': '%(asctime)s %(levelname)-8s [%(guid)s] %(name)s %(message)s'},
-        'json': {'()': 'awx.main.utils.formatters.LogstashFormatter'},
-        'timed_import': {'()': 'awx.main.utils.formatters.TimeFormatter', 'format': '%(relativeSeconds)9.3f %(levelname)-8s %(message)s'},
-        'dispatcher': {'format': '%(asctime)s %(levelname)-8s [%(guid)s] %(name)s PID:%(process)d %(message)s'},
+    "formatters": {
+        "simple": {
+            "format": "%(asctime)s %(levelname)-8s [%(guid)s] %(name)s %(message)s"
+        },
+        "json": {"()": "awx.main.utils.formatters.LogstashFormatter"},
+        "timed_import": {
+            "()": "awx.main.utils.formatters.TimeFormatter",
+            "format": "%(relativeSeconds)9.3f %(levelname)-8s %(message)s",
+        },
+        "dispatcher": {
+            "format": "%(asctime)s %(levelname)-8s [%(guid)s] %(name)s PID:%(process)d %(message)s"
+        },
     },
     # Extended below based on install scenario. You probably don't want to add something directly here.
     # See 'handler_config' below.
-    'handlers': {
-        'console': {
-            '()': 'logging.StreamHandler',
-            'level': 'DEBUG',
-            'filters': ['dynamic_level_filter', 'guid'],
-            'formatter': 'simple',
+    "handlers": {
+        "console": {
+            "()": "logging.StreamHandler",
+            "level": "DEBUG",
+            "filters": ["dynamic_level_filter", "guid"],
+            "formatter": "simple",
         },
-        'null': {'class': 'logging.NullHandler'},
-        'file': {'class': 'logging.NullHandler', 'formatter': 'simple'},
-        'syslog': {'level': 'WARNING', 'filters': ['require_debug_false'], 'class': 'logging.NullHandler', 'formatter': 'simple'},
-        'inventory_import': {'level': 'DEBUG', 'class': 'logging.StreamHandler', 'formatter': 'timed_import'},
-        'external_logger': {
-            'class': 'awx.main.utils.handlers.RSysLogHandler',
-            'formatter': 'json',
-            'address': '/var/run/awx-rsyslog/rsyslog.sock',
-            'filters': ['external_log_enabled', 'dynamic_level_filter', 'guid'],
+        "null": {"class": "logging.NullHandler"},
+        "file": {"class": "logging.NullHandler", "formatter": "simple"},
+        "syslog": {
+            "level": "WARNING",
+            "filters": ["require_debug_false"],
+            "class": "logging.NullHandler",
+            "formatter": "simple",
         },
-        'otel': {'class': 'logging.NullHandler'},
+        "inventory_import": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "timed_import",
+        },
+        "external_logger": {
+            "class": "awx.main.utils.handlers.RSysLogHandler",
+            "formatter": "json",
+            "address": "/var/run/awx-rsyslog/rsyslog.sock",
+            "filters": ["external_log_enabled", "dynamic_level_filter", "guid"],
+        },
+        "otel": {"class": "logging.NullHandler"},
     },
-    'loggers': {
-        'django': {'handlers': ['console']},
-        'django.request': {'handlers': ['console', 'file', 'tower_warnings'], 'level': 'WARNING'},
-        'ansible_base': {'handlers': ['console', 'file', 'tower_warnings']},
-        'daphne': {'handlers': ['console', 'file', 'tower_warnings'], 'level': 'INFO'},
-        'rest_framework.request': {'handlers': ['console', 'file', 'tower_warnings'], 'level': 'WARNING', 'propagate': False},
-        'py.warnings': {'handlers': ['console']},
-        'awx': {'handlers': ['console', 'file', 'tower_warnings', 'external_logger'], 'level': 'DEBUG'},
-        'awx.conf': {'handlers': ['null'], 'level': 'WARNING'},
-        'awx.conf.settings': {'handlers': ['null'], 'level': 'WARNING'},
-        'awx.main': {'handlers': ['null']},
-        'awx.main.commands.run_callback_receiver': {'handlers': ['callback_receiver'], 'level': 'INFO'},  # very noisey debug-level logs
-        'awx.main.dispatch': {'handlers': ['dispatcher']},
-        'awx.main.consumers': {'handlers': ['console', 'file', 'tower_warnings'], 'level': 'INFO'},
-        'awx.main.rsyslog_configurer': {'handlers': ['rsyslog_configurer']},
-        'awx.main.cache_clear': {'handlers': ['cache_clear']},
-        'awx.main.ws_heartbeat': {'handlers': ['ws_heartbeat']},
-        'awx.main.wsrelay': {'handlers': ['wsrelay']},
-        'awx.main.commands.inventory_import': {'handlers': ['inventory_import'], 'propagate': False},
-        'awx.main.tasks': {'handlers': ['task_system', 'external_logger', 'console'], 'propagate': False},
-        'awx.main.analytics': {'handlers': ['task_system', 'external_logger', 'console'], 'level': 'INFO', 'propagate': False},
-        'awx.main.scheduler': {'handlers': ['task_system', 'external_logger', 'console'], 'propagate': False},
-        'awx.main.access': {'level': 'INFO'},  # very verbose debug-level logs
-        'awx.main.signals': {'level': 'INFO'},  # very verbose debug-level logs
-        'awx.api.permissions': {'level': 'INFO'},  # very verbose debug-level logs
-        'awx.analytics': {'handlers': ['external_logger'], 'level': 'INFO', 'propagate': False},
-        'awx.analytics.broadcast_websocket': {'handlers': ['console', 'file', 'wsrelay', 'external_logger'], 'level': 'INFO', 'propagate': False},
-        'awx.analytics.performance': {'handlers': ['console', 'file', 'tower_warnings', 'external_logger'], 'level': 'DEBUG', 'propagate': False},
-        'awx.analytics.job_lifecycle': {'handlers': ['console', 'job_lifecycle', 'external_logger'], 'level': 'DEBUG', 'propagate': False},
-        'social': {'handlers': ['console', 'file', 'tower_warnings'], 'level': 'DEBUG'},
-        'system_tracking_migrations': {'handlers': ['console', 'file', 'tower_warnings'], 'level': 'DEBUG'},
-        'rbac_migrations': {'handlers': ['console', 'file', 'tower_warnings'], 'level': 'DEBUG'},
-        'dispatcherd': {'handlers': ['dispatcher', 'console'], 'level': 'INFO'},
+    "loggers": {
+        "django": {"handlers": ["console"]},
+        "django.request": {
+            "handlers": ["console", "file", "tower_warnings"],
+            "level": "WARNING",
+        },
+        "ansible_base": {"handlers": ["console", "file", "tower_warnings"]},
+        "daphne": {"handlers": ["console", "file", "tower_warnings"], "level": "INFO"},
+        "rest_framework.request": {
+            "handlers": ["console", "file", "tower_warnings"],
+            "level": "WARNING",
+            "propagate": False,
+        },
+        "py.warnings": {"handlers": ["console"]},
+        "awx": {
+            "handlers": ["console", "file", "tower_warnings", "external_logger"],
+            "level": "DEBUG",
+        },
+        "awx.conf": {"handlers": ["null"], "level": "WARNING"},
+        "awx.conf.settings": {"handlers": ["null"], "level": "WARNING"},
+        "awx.main": {"handlers": ["null"]},
+        "awx.main.commands.run_callback_receiver": {
+            "handlers": ["callback_receiver"],
+            "level": "INFO",
+        },  # very noisey debug-level logs
+        "awx.main.dispatch": {"handlers": ["dispatcher"]},
+        "awx.main.consumers": {
+            "handlers": ["console", "file", "tower_warnings"],
+            "level": "INFO",
+        },
+        "awx.main.rsyslog_configurer": {"handlers": ["rsyslog_configurer"]},
+        "awx.main.cache_clear": {"handlers": ["cache_clear"]},
+        "awx.main.ws_heartbeat": {"handlers": ["ws_heartbeat"]},
+        "awx.main.wsrelay": {"handlers": ["wsrelay"]},
+        "awx.main.commands.inventory_import": {
+            "handlers": ["inventory_import"],
+            "propagate": False,
+        },
+        "awx.main.tasks": {
+            "handlers": ["task_system", "external_logger", "console"],
+            "propagate": False,
+        },
+        "awx.main.analytics": {
+            "handlers": ["task_system", "external_logger", "console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        "awx.main.scheduler": {
+            "handlers": ["task_system", "external_logger", "console"],
+            "propagate": False,
+        },
+        "awx.main.access": {"level": "INFO"},  # very verbose debug-level logs
+        "awx.main.signals": {"level": "INFO"},  # very verbose debug-level logs
+        "awx.api.permissions": {"level": "INFO"},  # very verbose debug-level logs
+        "awx.analytics": {
+            "handlers": ["external_logger"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        "awx.analytics.broadcast_websocket": {
+            "handlers": ["console", "file", "wsrelay", "external_logger"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        "awx.analytics.performance": {
+            "handlers": ["console", "file", "tower_warnings", "external_logger"],
+            "level": "DEBUG",
+            "propagate": False,
+        },
+        "awx.analytics.job_lifecycle": {
+            "handlers": ["console", "job_lifecycle", "external_logger"],
+            "level": "DEBUG",
+            "propagate": False,
+        },
+        "social": {"handlers": ["console", "file", "tower_warnings"], "level": "DEBUG"},
+        "system_tracking_migrations": {
+            "handlers": ["console", "file", "tower_warnings"],
+            "level": "DEBUG",
+        },
+        "rbac_migrations": {
+            "handlers": ["console", "file", "tower_warnings"],
+            "level": "DEBUG",
+        },
+        "dispatcherd": {"handlers": ["dispatcher", "console"], "level": "INFO"},
     },
 }
 
@@ -819,44 +947,49 @@ LOGGING = {
 # Specify 'filename' (used if the environment variable AWX_LOGGING_MODE is unset or 'file')
 # and an optional 'formatter'. If no formatter is specified, 'simple' is used.
 handler_config = {
-    'tower_warnings': {'filename': 'tower.log'},
-    'callback_receiver': {'filename': 'callback_receiver.log'},
-    'dispatcher': {'filename': 'dispatcher.log', 'formatter': 'dispatcher'},
-    'wsrelay': {'filename': 'wsrelay.log'},
-    'task_system': {'filename': 'task_system.log'},
-    'rbac_migrations': {'filename': 'tower_rbac_migrations.log'},
-    'job_lifecycle': {'filename': 'job_lifecycle.log'},
-    'rsyslog_configurer': {'filename': 'rsyslog_configurer.log'},
-    'cache_clear': {'filename': 'cache_clear.log'},
-    'ws_heartbeat': {'filename': 'ws_heartbeat.log'},
+    "tower_warnings": {"filename": "tower.log"},
+    "callback_receiver": {"filename": "callback_receiver.log"},
+    "dispatcher": {"filename": "dispatcher.log", "formatter": "dispatcher"},
+    "wsrelay": {"filename": "wsrelay.log"},
+    "task_system": {"filename": "task_system.log"},
+    "rbac_migrations": {"filename": "tower_rbac_migrations.log"},
+    "job_lifecycle": {"filename": "job_lifecycle.log"},
+    "rsyslog_configurer": {"filename": "rsyslog_configurer.log"},
+    "cache_clear": {"filename": "cache_clear.log"},
+    "ws_heartbeat": {"filename": "ws_heartbeat.log"},
 }
 
 # If running on a VM, we log to files. When running in a container, we log to stdout.
-logging_mode = os.getenv('AWX_LOGGING_MODE', 'file')
-if logging_mode not in ('file', 'stdout'):
+logging_mode = os.getenv("AWX_LOGGING_MODE", "file")
+if logging_mode not in ("file", "stdout"):
     raise Exception("AWX_LOGGING_MODE must be 'file' or 'stdout'")
 
 for name, config in handler_config.items():
     # Common log handler config. Don't define a level here, it's set by settings.LOG_AGGREGATOR_LEVEL
-    LOGGING['handlers'][name] = {'filters': ['dynamic_level_filter', 'guid'], 'formatter': config.get('formatter', 'simple')}
+    LOGGING["handlers"][name] = {
+        "filters": ["dynamic_level_filter", "guid"],
+        "formatter": config.get("formatter", "simple"),
+    }
 
-    if logging_mode == 'file':
-        LOGGING['handlers'][name]['class'] = 'logging.handlers.WatchedFileHandler'
-        LOGGING['handlers'][name]['filename'] = os.path.join(LOG_ROOT, config['filename'])
+    if logging_mode == "file":
+        LOGGING["handlers"][name]["class"] = "logging.handlers.WatchedFileHandler"
+        LOGGING["handlers"][name]["filename"] = os.path.join(
+            LOG_ROOT, config["filename"]
+        )
 
-    if logging_mode == 'stdout':
-        LOGGING['handlers'][name]['class'] = 'logging.NullHandler'
+    if logging_mode == "stdout":
+        LOGGING["handlers"][name]["class"] = "logging.NullHandler"
 
 # Prevents logging to stdout on traditional VM installs
-if logging_mode == 'file':
-    LOGGING['handlers']['console']['filters'].insert(0, 'require_debug_true_or_test')
+if logging_mode == "file":
+    LOGGING["handlers"]["console"]["filters"].insert(0, "require_debug_true_or_test")
 
 # Apply coloring to messages logged to the console
 COLOR_LOGS = False
 
 # https://github.com/django-polymorphic/django-polymorphic/issues/195
 # FIXME: Disabling models.E006 warning until we can renamed Project and InventorySource
-SILENCED_SYSTEM_CHECKS = ['models.E006']
+SILENCED_SYSTEM_CHECKS = ["models.E006"]
 
 # Use middleware to get request statistics
 AWX_REQUEST_PROFILE = False
@@ -897,31 +1030,31 @@ RECEPTOR_RELEASE_WORK = True
 RECEPTOR_KEEP_WORK_ON_ERROR = False
 
 # K8S only. Use receptor_log_level on AWX spec to set this properly
-RECEPTOR_LOG_LEVEL = 'info'
+RECEPTOR_LOG_LEVEL = "info"
 
 MIDDLEWARE = [
-    'django_guid.middleware.guid_middleware',
-    'ansible_base.lib.middleware.logging.log_request.LogTracebackMiddleware',
-    'awx.main.middleware.SettingsCacheMiddleware',
-    'awx.main.middleware.TimingMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'awx.main.middleware.MigrationRanCheckMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'awx.main.middleware.DisableLocalAuthMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'awx.main.middleware.OptionalURLPrefixPath',
-    'crum.CurrentRequestUserMiddleware',
-    'awx.main.middleware.URLModificationMiddleware',
-    'awx.main.middleware.SessionTimeoutMiddleware',
+    "django_guid.middleware.guid_middleware",
+    "ansible_base.lib.middleware.logging.log_request.LogTracebackMiddleware",
+    "awx.main.middleware.SettingsCacheMiddleware",
+    "awx.main.middleware.TimingMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "awx.main.middleware.MigrationRanCheckMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "awx.main.middleware.DisableLocalAuthMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "awx.main.middleware.OptionalURLPrefixPath",
+    "crum.CurrentRequestUserMiddleware",
+    "awx.main.middleware.URLModificationMiddleware",
+    "awx.main.middleware.SessionTimeoutMiddleware",
 ]
 
 # Secret header value to exchange for websockets responsible for distributing websocket messages.
 # This needs to be kept secret and randomly generated
-BROADCAST_WEBSOCKET_SECRET = ''
+BROADCAST_WEBSOCKET_SECRET = ""
 
 # Port for broadcast websockets to connect to
 # Note: that the clients will follow redirect responses
@@ -931,10 +1064,10 @@ BROADCAST_WEBSOCKET_PORT = 443
 BROADCAST_WEBSOCKET_VERIFY_CERT = False
 
 # Connect to other AWX nodes using http or https
-BROADCAST_WEBSOCKET_PROTOCOL = 'https'
+BROADCAST_WEBSOCKET_PROTOCOL = "https"
 
 # All websockets that connect to the broadcast websocket endpoint will be put into this group
-BROADCAST_WEBSOCKET_GROUP_NAME = 'broadcast-group_send'
+BROADCAST_WEBSOCKET_GROUP_NAME = "broadcast-group_send"
 
 # Time wait before retrying connecting to a websocket broadcast tower node
 BROADCAST_WEBSOCKET_RECONNECT_RETRY_RATE_SECONDS = 5
@@ -948,12 +1081,12 @@ BROADCAST_WEBSOCKET_STATS_POLL_RATE_SECONDS = 5
 # How often should web instances advertise themselves?
 BROADCAST_WEBSOCKET_BEACON_FROM_WEB_RATE_SECONDS = 15
 
-DJANGO_GUID = {'GUID_HEADER_NAME': 'X-API-Request-Id'}
+DJANGO_GUID = {"GUID_HEADER_NAME": "X-API-Request-Id"}
 
 # Name of the default task queue
-DEFAULT_EXECUTION_QUEUE_NAME = 'default'
+DEFAULT_EXECUTION_QUEUE_NAME = "default"
 # pod spec used when the default execution queue is a container group, e.g. when deploying on k8s/ocp with the operator
-DEFAULT_EXECUTION_QUEUE_POD_SPEC_OVERRIDE = ''
+DEFAULT_EXECUTION_QUEUE_POD_SPEC_OVERRIDE = ""
 # Max number of concurrently consumed forks for the default execution queue
 # Zero means no limit
 DEFAULT_EXECUTION_QUEUE_MAX_FORKS = 0
@@ -962,12 +1095,12 @@ DEFAULT_EXECUTION_QUEUE_MAX_FORKS = 0
 DEFAULT_EXECUTION_QUEUE_MAX_CONCURRENT_JOBS = 0
 
 # Name of the default controlplane queue
-DEFAULT_CONTROL_PLANE_QUEUE_NAME = 'controlplane'
+DEFAULT_CONTROL_PLANE_QUEUE_NAME = "controlplane"
 
 # Extend container runtime attributes.
 # For example, to disable SELinux in containers for podman
 # DEFAULT_CONTAINER_RUN_OPTIONS = ['--security-opt', 'label=disable']
-DEFAULT_CONTAINER_RUN_OPTIONS = ['--network', 'slirp4netns:enable_ipv6=true']
+DEFAULT_CONTAINER_RUN_OPTIONS = ["--network", "slirp4netns:enable_ipv6=true"]
 
 # Mount exposed paths as hostPath resource in k8s/ocp
 AWX_MOUNT_ISOLATED_PATHS_ON_K8S = False
@@ -978,10 +1111,10 @@ CLUSTER_HOST_ID = socket.gethostname()
 # License compliance for total host count. Possible values:
 # - '': No model - Subscription not counted from Host Metrics
 # - 'unique_managed_hosts': Compliant = automated - deleted hosts (using /api/v2/host_metrics/)
-SUBSCRIPTION_USAGE_MODEL = ''
+SUBSCRIPTION_USAGE_MODEL = ""
 
 # Default URL and query params for obtaining valid AAP subscriptions
-SUBSCRIPTIONS_RHSM_URL = 'https://console.redhat.com/api/rhsm/v2/products?include=providedProducts&oids=480&status=Active'
+SUBSCRIPTIONS_RHSM_URL = "https://console.redhat.com/api/rhsm/v2/products?include=providedProducts&oids=480&status=Active"
 
 # Host metrics cleanup - last time of the task/command run
 CLEANUP_HOST_METRICS_LAST_TS = None
@@ -1009,67 +1142,88 @@ HOST_METRIC_SUMMARY_TASK_INTERVAL = 7  # days
 # TODO: cmeyers, break this out into a separate django app so other
 # projects can take advantage.
 
-METRICS_SERVICE_CALLBACK_RECEIVER = 'callback_receiver'
-METRICS_SERVICE_DISPATCHER = 'dispatcherd'
-METRICS_SERVICE_WEBSOCKETS = 'websockets'
+METRICS_SERVICE_CALLBACK_RECEIVER = "callback_receiver"
+METRICS_SERVICE_DISPATCHER = "dispatcherd"
+METRICS_SERVICE_WEBSOCKETS = "websockets"
 
 METRICS_SUBSYSTEM_CONFIG = {
-    'server': {
+    "server": {
         METRICS_SERVICE_CALLBACK_RECEIVER: {
-            'port': 8014,
+            "port": 8014,
         },
         METRICS_SERVICE_DISPATCHER: {
-            'port': 8015,
+            "port": 8015,
         },
         METRICS_SERVICE_WEBSOCKETS: {
-            'port': 8016,
+            "port": 8016,
         },
     }
 }
 
 # django-ansible-base
-ANSIBLE_BASE_TEAM_MODEL = 'main.Team'
-ANSIBLE_BASE_ORGANIZATION_MODEL = 'main.Organization'
-ANSIBLE_BASE_RESOURCE_CONFIG_MODULE = 'awx.resource_api'
-ANSIBLE_BASE_PERMISSION_MODEL = 'main.Permission'
+ANSIBLE_BASE_TEAM_MODEL = "main.Team"
+ANSIBLE_BASE_ORGANIZATION_MODEL = "main.Organization"
+ANSIBLE_BASE_RESOURCE_CONFIG_MODULE = "awx.resource_api"
+ANSIBLE_BASE_PERMISSION_MODEL = "main.Permission"
+
+# django-ansible-base authentication settings
+ANSIBLE_BASE_AUTHENTICATOR_CLASS_PREFIXES = [
+    "ansible_base.authentication.authenticator_plugins"
+]
+ANSIBLE_BASE_USER_VIEWSET = "awx.api.views.UserViewSet"
+
+# Social auth settings for DAB authentication
+SOCIAL_AUTH_POSTGRES_JSONFIELD = True
+SOCIAL_AUTH_PIPELINE = (
+    "social_core.pipeline.social_auth.social_details",
+    "social_core.pipeline.social_auth.social_uid",
+    "social_core.pipeline.social_auth.auth_allowed",
+    "social_core.pipeline.social_auth.social_user",
+    "social_core.pipeline.user.get_username",
+    "social_core.pipeline.user.create_user",
+    "social_core.pipeline.social_auth.associate_user",
+    "social_core.pipeline.social_auth.load_extra_data",
+    "social_core.pipeline.user.user_details",
+    "ansible_base.authentication.social_auth.create_user_claims_pipeline",
+)
 
 # Defaults to be overridden by DAB
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'AWX API',
-    'DESCRIPTION': 'AWX API Documentation',
-    'VERSION': 'v2',
-    'OAS_VERSION': '3.0.3',  # Set OpenAPI Specification version to 3.0.3
-    'SERVE_INCLUDE_SCHEMA': False,
-    'SCHEMA_PATH_PREFIX': r'/api/v[0-9]',
-    'DEFAULT_GENERATOR_CLASS': 'drf_spectacular.generators.SchemaGenerator',
-    'SCHEMA_COERCE_PATH_PK_SUFFIX': True,
-    'CONTACT': {'email': 'controller-eng@redhat.com'},
-    'LICENSE': {'name': 'Apache License'},
-    'TERMS_OF_SERVICE': 'https://www.google.com/policies/terms/',
+    "TITLE": "AWX API",
+    "DESCRIPTION": "AWX API Documentation",
+    "VERSION": "v2",
+    "OAS_VERSION": "3.0.3",  # Set OpenAPI Specification version to 3.0.3
+    "SERVE_INCLUDE_SCHEMA": False,
+    "SCHEMA_PATH_PREFIX": r"/api/v[0-9]",
+    "DEFAULT_GENERATOR_CLASS": "drf_spectacular.generators.SchemaGenerator",
+    "SCHEMA_COERCE_PATH_PK_SUFFIX": True,
+    "CONTACT": {"email": "controller-eng@redhat.com"},
+    "LICENSE": {"name": "Apache License"},
+    "TERMS_OF_SERVICE": "https://www.google.com/policies/terms/",
     # Use our custom schema class that handles swagger_topic and deprecated views
-    'DEFAULT_SCHEMA_CLASS': 'awx.api.schema.CustomAutoSchema',
-    'COMPONENT_SPLIT_REQUEST': True,
-    'SWAGGER_UI_SETTINGS': {
-        'deepLinking': True,
-        'persistAuthorization': True,
-        'displayOperationId': True,
+    "DEFAULT_SCHEMA_CLASS": "awx.api.schema.CustomAutoSchema",
+    "COMPONENT_SPLIT_REQUEST": True,
+    "SWAGGER_UI_SETTINGS": {
+        "deepLinking": True,
+        "persistAuthorization": True,
+        "displayOperationId": True,
     },
     # Resolve enum naming collisions with meaningful names
-    'ENUM_NAME_OVERRIDES': {
+    "ENUM_NAME_OVERRIDES": {
         # Status field collisions
-        'Status4e1Enum': 'UnifiedJobStatusEnum',
-        'Status876Enum': 'JobStatusEnum',
+        "Status4e1Enum": "UnifiedJobStatusEnum",
+        "Status876Enum": "JobStatusEnum",
         # Job type field collisions
-        'JobType8b8Enum': 'JobTemplateJobTypeEnum',
-        'JobType95bEnum': 'AdHocCommandJobTypeEnum',
-        'JobType963Enum': 'ProjectUpdateJobTypeEnum',
+        "JobType8b8Enum": "JobTemplateJobTypeEnum",
+        "JobType95bEnum": "AdHocCommandJobTypeEnum",
+        "JobType963Enum": "ProjectUpdateJobTypeEnum",
         # Verbosity field collisions
-        'Verbosity481Enum': 'JobVerbosityEnum',
-        'Verbosity8cfEnum': 'InventoryUpdateVerbosityEnum',
+        "Verbosity481Enum": "JobVerbosityEnum",
+        "Verbosity8cfEnum": "InventoryUpdateVerbosityEnum",
         # Event field collision
-        'Event4d3Enum': 'JobEventEnum',
+        "Event4d3Enum": "JobEventEnum",
         # Kind field collision
-        'Kind362Enum': 'InventoryKindEnum',
+        "Kind362Enum": "InventoryKindEnum",
     },
 }
 OAUTH2_PROVIDER = {}
@@ -1077,15 +1231,15 @@ OAUTH2_PROVIDER = {}
 # Add a postfix to the API URL patterns
 # example if set to '' API pattern will be /api
 # example if set to 'controller' API pattern will be /api AND /api/controller
-OPTIONAL_API_URLPATTERN_PREFIX = ''
+OPTIONAL_API_URLPATTERN_PREFIX = ""
 
 # Add a postfix to the UI URL patterns for UI URL generated by the API
 # example if set to '' UI URL generated by the API for jobs would be $TOWER_URL/jobs
 # example if set to 'execution' UI URL generated by the API for jobs would be $TOWER_URL/execution/jobs
-OPTIONAL_UI_URL_PREFIX = ''
+OPTIONAL_UI_URL_PREFIX = ""
 
 # Use AWX base view, to give 401 on unauthenticated requests
-ANSIBLE_BASE_CUSTOM_VIEW_PARENT = 'awx.api.generics.APIView'
+ANSIBLE_BASE_CUSTOM_VIEW_PARENT = "awx.api.generics.APIView"
 
 # If we have a resource server defined, apply local changes to that server
 RESOURCE_SERVER_SYNC_ENABLED = True
@@ -1096,13 +1250,22 @@ RESOURCE_SERVER_SYNC_ENABLED = True
 ANSIBLE_BASE_ROLE_PRECREATE = {}
 
 # Name for auto-created roles that give users permissions to what they create
-ANSIBLE_BASE_ROLE_CREATOR_NAME = '{cls.__name__} Creator'
+ANSIBLE_BASE_ROLE_CREATOR_NAME = "{cls.__name__} Creator"
 
 # Use the new Gateway RBAC system for evaluations? You should. We will remove the old system soon.
 ANSIBLE_BASE_ROLE_SYSTEM_ACTIVATED = True
 
 # Permissions a user will get when creating a new item
-ANSIBLE_BASE_CREATOR_DEFAULTS = ['change', 'delete', 'execute', 'use', 'adhoc', 'approve', 'update', 'view']
+ANSIBLE_BASE_CREATOR_DEFAULTS = [
+    "change",
+    "delete",
+    "execute",
+    "use",
+    "adhoc",
+    "approve",
+    "update",
+    "view",
+]
 
 # Temporary, for old roles API compatibility, save child permissions at organization level
 ANSIBLE_BASE_CACHE_PARENT_PERMISSIONS = True
@@ -1113,8 +1276,12 @@ ANSIBLE_BASE_ALLOW_TEAM_ORG_ADMIN = False
 ANSIBLE_BASE_ALLOW_TEAM_PARENTS = False
 ANSIBLE_BASE_ALLOW_CUSTOM_TEAM_ROLES = False
 ANSIBLE_BASE_ALLOW_SINGLETON_USER_ROLES = True
-ANSIBLE_BASE_ALLOW_SINGLETON_TEAM_ROLES = False  # System auditor has always been restricted to users
-ANSIBLE_BASE_ALLOW_SINGLETON_ROLES_API = False  # Do not allow creating user-defined system-wide roles
+ANSIBLE_BASE_ALLOW_SINGLETON_TEAM_ROLES = (
+    False  # System auditor has always been restricted to users
+)
+ANSIBLE_BASE_ALLOW_SINGLETON_ROLES_API = (
+    False  # Do not allow creating user-defined system-wide roles
+)
 
 # system username for django-ansible-base
 SYSTEM_USERNAME = None
@@ -1134,18 +1301,20 @@ INDIRECT_HOST_AUDIT_RECORD_MAX_AGE_DAYS = 7
 # setting for Policy as Code feature
 FEATURE_POLICY_AS_CODE_ENABLED = False
 
-OPA_HOST = ''  # The hostname used to connect to the OPA server. If empty, policy enforcement will be disabled.
+OPA_HOST = ""  # The hostname used to connect to the OPA server. If empty, policy enforcement will be disabled.
 OPA_PORT = 8181  # The port used to connect to the OPA server. Defaults to 8181.
 OPA_SSL = False  # Enable or disable the use of SSL to connect to the OPA server. Defaults to false.
 
-OPA_AUTH_TYPE = 'None'  # The authentication type that will be used to connect to the OPA server: "None", "Token", or "Certificate".
-OPA_AUTH_TOKEN = ''  # The token for authentication to the OPA server. Required when OPA_AUTH_TYPE is "Token". If an authorization header is defined in OPA_AUTH_CUSTOM_HEADERS, it will be overridden by OPA_AUTH_TOKEN.
-OPA_AUTH_CLIENT_CERT = ''  # The content of the client certificate file for mTLS authentication to the OPA server. Required when OPA_AUTH_TYPE is "Certificate".
-OPA_AUTH_CLIENT_KEY = ''  # The content of the client key for mTLS authentication to the OPA server. Required when OPA_AUTH_TYPE is "Certificate".
-OPA_AUTH_CA_CERT = ''  # The content of the CA certificate for mTLS authentication to the OPA server. Required when OPA_AUTH_TYPE is "Certificate".
+OPA_AUTH_TYPE = "None"  # The authentication type that will be used to connect to the OPA server: "None", "Token", or "Certificate".
+OPA_AUTH_TOKEN = ""  # The token for authentication to the OPA server. Required when OPA_AUTH_TYPE is "Token". If an authorization header is defined in OPA_AUTH_CUSTOM_HEADERS, it will be overridden by OPA_AUTH_TOKEN.
+OPA_AUTH_CLIENT_CERT = ""  # The content of the client certificate file for mTLS authentication to the OPA server. Required when OPA_AUTH_TYPE is "Certificate".
+OPA_AUTH_CLIENT_KEY = ""  # The content of the client key for mTLS authentication to the OPA server. Required when OPA_AUTH_TYPE is "Certificate".
+OPA_AUTH_CA_CERT = ""  # The content of the CA certificate for mTLS authentication to the OPA server. Required when OPA_AUTH_TYPE is "Certificate".
 OPA_AUTH_CUSTOM_HEADERS = {}  # Optional custom headers included in requests to the OPA server. Defaults to empty dictionary ({}).
 OPA_REQUEST_TIMEOUT = 1.5  # The number of seconds after which the connection to the OPA server will time out. Defaults to 1.5 seconds.
-OPA_REQUEST_RETRIES = 2  # The number of retry attempts for connecting to the OPA server. Default is 2.
+OPA_REQUEST_RETRIES = (
+    2  # The number of retry attempts for connecting to the OPA server. Default is 2.
+)
 
 # feature flags
 FEATURE_INDIRECT_NODE_COUNTING_ENABLED = False
